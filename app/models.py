@@ -83,9 +83,9 @@ class Subscriber(UserMixin, db.Model):
        db.session.add(self)
        db.session.commit()       
 
-# class Quote:
-#     def __init__(self,id,author,quote):
-#         self.id =id
-#         self.author = author
-#         self. quote = quote
+class Quote:
+    def __init__(self,id,author,quote):
+        self.id =id
+        self.author = author
+        self. quote = quote
     

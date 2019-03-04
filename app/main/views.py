@@ -1,9 +1,10 @@
-from flask import render_template,request,redirect,url_for,abort
+from flask import render_template,request,redirect,url_for,abort,request
 from . import main
-from ..models import  User,Blog,Comment,Subscriber
+from ..models import  User,Blog,Comment,Subscriber,Quote
 from flask_login import login_required, current_user
 from .forms import BlogForm,CommentForm,UpdateProfile,SubscriberForm
 from .. import db,photos
+from ..request import get_quotes
 
 
 # Views
@@ -14,11 +15,11 @@ def index():
     '''
 
     title = 'Home - Welcome to The Blogs Application'
-    # quote = get_quotes()
+    quote = get_quotes()
     blogs = Blog.get_blogs()
     
 
-    return render_template('index.html', title = title, blogs=blogs)
+    return render_template('index.html', title = title, blogs=blogs, quote=quote)
 
 
 @main.route('/user/<uname>')
@@ -109,3 +110,31 @@ def subscriber():
         return redirect(url_for('main.index'))
         title = 'Subscribe'
     return render_template('subscription.html',form=form)
+
+
+
+@main.route('/blog/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_blog(id):
+    """
+    Edit a blogpost in the database
+    """
+    new_blog=False
+
+    blog = Blog.get_blogs(id)
+    form = BlogForm()
+
+    if form.validate_on_submit():
+        blog.blog = form.blog.data
+
+        db.session.commit()
+        print('edited comment ')
+
+
+        return redirect(url_for('main.index'))
+        form.blog.data = blog.blog
+
+    return render_template('new_blog.html',action = 'Edit',
+                           new_blog = new_blog,
+                           blog_form = form,
+                           legend='Update Post')
