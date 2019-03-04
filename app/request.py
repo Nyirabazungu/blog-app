@@ -60,7 +60,7 @@ def get_quotes():
             id=get_quotes_response.get('id')
             author=get_quotes_response.get('author')
             quote=get_quotes_response.get('quote')
-            
+            quote_object = Quote(id,author,quote)
 
     return quote_object
 
