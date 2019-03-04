@@ -13,6 +13,7 @@ class UpdateProfile(FlaskForm):
     submit = SubmitField('Submit')
 
 class SubscriberForm(FlaskForm):
+    username = StringField("Enter your name")
     email = StringField("Email", validators=[Required()])
     submit= SubmitField('Subscribe')   
 

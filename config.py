@@ -12,7 +12,7 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
-    SENDER_EMAIL= "vvalentine@gmail.com"
+    SENDER_EMAIL= "vnyirabazungu@gmail.com"
     # simple mde  configurations
     SIMPLEMDE_JS_IIFE = True
     SIMPLEMDE_USE_CDN = True
@@ -23,9 +23,7 @@ class ProdConfig(Config):
 
 
 class DevConfig(Config):
-    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:vnyanki6@localhost/blog'   
-    
-
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:vnyanki6@localhost/valentine'   
     DEBUG = True
 
 config_options = {

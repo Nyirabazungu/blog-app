@@ -101,14 +101,13 @@ def subscriber():
     form=SubscriberForm()
 
     if form.validate_on_submit():
-        subscriber = Subscriber(email=form.email.data)
+        subscriber = Subscriber(username=form.username.data,email=form.email.data)
         db.session.add(subscriber)
         db.session.commit()
 
         # mail_message("Welcome to my blog","email/welcome_user",subscriber.email,subscriber=subscriber)
-        # flask_login('A confirmation by email has been sent to you by email')
+        # flash('A confirmation by email has been sent to you by email')
         return redirect(url_for('main.index'))
-        title = 'Subscribe'
     return render_template('subscription.html',form=form)
 
 

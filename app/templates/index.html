@@ -12,30 +12,34 @@
 
     {% block styles %}
       {{ super() }}
+      <link rel="stylesheet" href="{{url_for('static',filename='CSS/index.css')}}">
     
     {% endblock %}
   {%block content%}
-  <h2 style="background-color:grey;">WELCOME TO BLOGS APPLICATION</h2>
+  <center><h2 style="background-color:grey;">WELCOME TO BLOGS APPLICATION</h2></center>
    
-  <div class="container">
+ 
       <blockquote class="text-center text-lg">
           <h2>Quotes</h2>
           <p style="font-family:monospace;">{{quote.quote}}</p>
           <p style="font-family: monospace;"><b>Author:</b> {{quote.author}}</p>
-   
-    <blockquote class="text-center text-lg">
-   <p>Already signed in? Write your pitch <a href="/new"></a><a href="{{url_for('main.new_blog')}}"><button>ADD POST</button> </a></p>
-   
-    <blockquote class="text-center text-lg">
+ <div class="container">
+   <p>Already signed in? Write your blog <a href="/new"></a><a href="{{url_for('main.new_blog')}}"><button>here</button></p>
+   <hr>
+      
+    <center>
     {% for blog in blogs%} 
    <p>{{blog.blog}}</p> 
-  <button><a href="/subscribe">subscribe</a></button>
-   <p><a href="/new"></a><a href="{{url_for('main.new_comment', id= blog.id)}}"><button>Comment</button></a></p>
+   <a href="/new"></a><a href="{{url_for('main.new_comment', id= blog.id)}}"><button>Comment</button></a>
    <a class="btn btn-primary btn-md" href="/delete/{{blog.id}}">Delete blog</a>
-  </div>
+    <br>
+   
      {% endfor %}
-
+   <br> <hr>
+<button><a href="/subscribe">subscribe</a></button>
  {% endblock%}
-
+ <br>
+</center>
+</div>
 </body>
 </html>
