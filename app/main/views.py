@@ -101,11 +101,11 @@ def subscriber():
     form=SubscriberForm()
 
     if form.validate_on_submit():
-        subscriber = Subscriber(name=form.name.data,email=form.email.data)
+        subscriber = Subscriber(username=form.username.data,email=form.email.data)
         db.session.add(subscriber)
         db.session.commit()
 
-        mail_message("Welcome to my blog","email/welcome_user",subscriber.email,subscriber=subscriber)
+        # mail_message("Welcome to my blog","email/welcome_user",subscriber.email,subscriber=subscriber)
         flash('A confirmation by email has been sent to you by email')
         return redirect(url_for('main.index'))
         title = 'Subscribe'
