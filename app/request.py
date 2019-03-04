@@ -10,16 +10,15 @@ base_url = None
 
 def configure_request(app):
     global base_url
-    # base_url =['BLOG_API_BASE_URL']
+    base_url =['BLOG_API_BASE_URL']
 
 def get_quotes():
     '''
     Function that gets the json response to our url request
     '''
-    base_url ='http://quotes.stormconsultancy.co.uk/random.json'
-    print(base_url)
+   
 
-    with urllib.request.urlopen(get_quotes_url) as url:
+    with urllib.request.urlopen(base_url) as url:
         get_quotes_data = url.read()
         get_quotes_response = json.loads(get_quotes_data)
 
@@ -32,5 +31,6 @@ def get_quotes():
           quote=get_quotes_response.get('quote')
           quote_object = Quote(id,author,quote)
 
+    return quote_object
 
 
