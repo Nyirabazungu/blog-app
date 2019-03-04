@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% import 'macros.html' as macro %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +8,7 @@
   <title>Document</title>
 </head>
 <body > 
-    {% extends 'base.html' %}
+
 
     {% block styles %}
       {{ super() }}
@@ -29,11 +28,9 @@
    
 
    <p>Already signed in? Write your pitch <a href="/new"></a><a href="{{url_for('main.new_blog')}}"><button>POST</button> </a></p>
-   <a class="btn btn-primary btn-md" href="/delete/{{blog.id}}">Delete blog</a>
+   
    <a href="/subscribe" style="float:right;">subscribe</a>
 
-<br><br>
-{% for blog in blogs [::-1] %}
 
 <div class="container-fluid">
   <div class="card-deck">
@@ -43,8 +40,8 @@
   
     {% for blog in blogs%} 
    <p>{{blog.blog}}</p> 
-   <p style="background-color:grey;"><a href="/new"></a><a href="{{url_for('main.new_comment', id= blog.id)}}"><button>Comment</button></a><button>Like</button><button>Unlike</button></p>
-     {% endfor %}
+   <p><a href="/new"></a><a href="{{url_for('main.new_comment', id= blog.id)}}"><button>Comment</button></a></p>
+   <a class="btn btn-primary btn-md" href="/delete/{{blog.id}}">Delete blog</a>
      {% endfor %}
 
  {% endblock%}
