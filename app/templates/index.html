@@ -43,9 +43,9 @@
   
     {% for blog in blogs%} 
    <p>{{blog.blog}}</p> 
-   <p><a href="/new"></a><a href="{{url_for('main.new_comment', id= blog.id)}}"><button>Comment</button></a><button>Like</button><button>Unlike</button></p>
+   <p style="background-color:grey;"><a href="/new"></a><a href="{{url_for('main.new_comment', id= blog.id)}}"><button>Comment</button></a><button>Like</button><button>Unlike</button></p>
      {% endfor %}
-    
+     {% endfor %}
 
  {% endblock%}
 
