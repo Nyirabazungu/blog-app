@@ -67,6 +67,10 @@ class Comment(db.Model):
     def save_comments(self):
         db.session.add(self)
         db.session.commit()
+    @classmethod
+    def delete_comment(self):
+        db.session.delete(self)
+        db.session.commit()  
 
     def __repr__(self):
         return f'User {self.comment}'
@@ -75,7 +79,6 @@ class Subscriber(UserMixin, db.Model):
    __tablename__="subscribers"
 
    id = db.Column(db.Integer, primary_key=True)
-   username = db.Column(db.String(255))
    email = db.Column(db.String(255),unique = True,index = True)
 
 

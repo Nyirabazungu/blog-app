@@ -101,12 +101,12 @@ def subscriber():
     form=SubscriberForm()
 
     if form.validate_on_submit():
-        subscriber = Subscriber(username=form.username.data,email=form.email.data)
+        subscriber = Subscriber(email=form.email.data)
         db.session.add(subscriber)
         db.session.commit()
 
         # mail_message("Welcome to my blog","email/welcome_user",subscriber.email,subscriber=subscriber)
-        flash('A confirmation by email has been sent to you by email')
+        # flask_login('A confirmation by email has been sent to you by email')
         return redirect(url_for('main.index'))
         title = 'Subscribe'
     return render_template('subscription.html',form=form)
@@ -140,14 +140,10 @@ def edit_blog(id):
                            legend='Update Post')
 
 
-@main.route('/delete/new',methods=["GET","POST"])
-def delete_blog(id):
+@main.route('/delete/new<int:id>',methods=["GET","POST"])
+def delete_comment(id):
 
-    if form.validate_on_submit():
-        delete = Delete(comment=comment,blog_id=id,user_id=current_user.id)
-        db.session.delete(delete)
-        db.session.commit()   
+    if comment is not None:
+       commet.delete_comment()
 
-        return redirect(url_for('main.index')) 
-
-    return render_template('new_blog.html', blog_form= form)
+    return render_template('comment.html', comment_form= form)
