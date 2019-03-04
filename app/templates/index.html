@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
-<body > 
+<body style="background-colar:green" > 
 
 
     {% block styles %}
@@ -26,20 +26,14 @@
           
         </div>
    
-
+    <blockquote class="text-center text-lg">
    <p>Already signed in? Write your pitch <a href="/new"></a><a href="{{url_for('main.new_blog')}}"><button>ADD POST</button> </a></p>
    
-   <a href="/subscribe" style="float:right;">subscribe</a>
-
-
-<div class="container-fluid">
-  <div class="card-deck">
-  <div class="card">
-    <div class="card-header" style='text-align:center;'>
+    <blockquote class="text-center text-lg">
     </div>
-  
     {% for blog in blogs%} 
    <p>{{blog.blog}}</p> 
+  <button><a href="/subscribe">subscribe</a></button>
    <p><a href="/new"></a><a href="{{url_for('main.new_comment', id= blog.id)}}"><button>Comment</button></a></p>
    <a class="btn btn-primary btn-md" href="/delete/{{blog.id}}">Delete blog</a>
      {% endfor %}

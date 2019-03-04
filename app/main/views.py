@@ -138,3 +138,16 @@ def edit_blog(id):
                            new_blog = new_blog,
                            blog_form = form,
                            legend='Update Post')
+
+
+@main.route('/delete/new',methods=["GET","POST"])
+def delete_blog(id):
+
+    if form.validate_on_submit():
+        delete = Delete(comment=comment,blog_id=id,user_id=current_user.id)
+        db.session.delete(delete)
+        db.session.commit()   
+
+        return redirect(url_for('main.index')) 
+
+    return render_template('new_blog.html', blog_form= form)
