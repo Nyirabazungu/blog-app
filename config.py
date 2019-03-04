@@ -3,7 +3,7 @@ import os
 class Config:
 
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    BLOG_API_BASE_URL= 'http://quotes.stormconsultancy.co.uk/random.json'
+   
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:valentine@localhost/blog'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
     #  email configurations
