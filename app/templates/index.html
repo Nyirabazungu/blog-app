@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body > 
+  
+  {%block content%}
+  <h2 style="background-color:grey;">WELCOME TO BLOGS APPLICATION</h2>
+
+
+   
+
+   <p>Already signed in? Write your pitch <a href="/new"></a><a href="{{url_for('main.new_blog')}}"><button>POST</button> </a></p>
+   <a href="/subscribe" style="float:right;">subscribe</a>
+
+<br><br>
+{% for blog in blogs [::-1] %}
+
+<div class="container-fluid">
+  <div class="card-deck">
+  <div class="card">
+    <div class="card-header" style='text-align:center;'>
+      <!-- <h5>{{blog.username}}</h5> -->
+    </div>
+  
+    {% for blog in blogs%} 
+   <p>{{blog.blog}}</p> 
+   <p><a href="/new"></a><a href="{{url_for('main.new_comment', id= blog.id)}}"><button>Comment</button></a><button>Like</button><button>Unlike</button></p>
+     {% endfor %}
+     {% endfor %}
+
+ {% endblock%}
+
+</body>
+</html>

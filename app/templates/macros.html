@@ -1,0 +1,22 @@
+{% macro Blogs(blog_list) %}
+{% for blog in blog_list %}
+ 
+
+    <div class="row">
+
+      <div class="col-xs-2 col-sm-2 col-md-4 col-lg-4">
+        <h4>Poster</h4>
+        <p>{{blog.username}}</p>
+      </div>
+      <div class="col-xs-10 col-sm-10 col-md-8 col-lg-8">
+        <h2> <a href="{{url_for('main.single_blog',id=blog.id)}}">{{blog.username}}</a> </h2>
+        
+         
+          <li class ="padding-left">
+       
+      </div>
+    </div>
+
+   
+    {% endfor %}
+{% endmacro %}
