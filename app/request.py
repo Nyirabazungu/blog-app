@@ -62,5 +62,5 @@ def get_quotes():
             quote=get_quotes_response.get('quote')
             quote_object = Quote(id,author,quote)
 
-    return quote_object
+    
 
