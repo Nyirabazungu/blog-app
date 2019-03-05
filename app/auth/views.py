@@ -8,6 +8,7 @@ from flask_login import login_user,logout_user,login_required
 from ..email import mail_message
 
 
+
 @auth.route('/login',methods=['GET','POST'])
 def login():
     login_form = LoginForm()
@@ -17,7 +18,7 @@ def login():
             login_user(user,login_form.remember.data)
             return redirect(request.args.get('next') or url_for('main.index'))
 
-        flask('Invalid username or Password')
+        flash('Invalid username or Password')
 
   
     return render_template('auth/login.html',login_form = login_form)

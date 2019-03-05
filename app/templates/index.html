@@ -30,10 +30,12 @@
     <center>
     {% for blog in blogs%} 
    <p>{{blog.blog}}</p> 
+   <div class ="com">
    <a href="/new"></a><a href="{{url_for('main.new_comment', id= blog.id)}}"><button>Comment</button></a>
-   <a class="btn btn-primary btn-md" href="/delete/{{blog.id}}">Delete blog</a>
+   <a class="btn btn-primary btn-md" href="/delete/blog/{{blog.id}}">Delete blog</a>
+   <a class="btn btn-primary btn-md" href="/update/blog/{{blog.id}}">Update</a>
     <br>
-   
+  </div>
      {% endfor %}
    <br> <hr>
 <button><a href="/subscribe">subscribe</a></button>

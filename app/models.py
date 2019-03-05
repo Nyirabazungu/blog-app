@@ -52,7 +52,11 @@ class Blog(db.Model):
     @classmethod
     def get_blogs(cls):
         blogs = Blog.query.all()
-        return blogs   
+        return blogs
+    def delete_blogs(self):
+           
+            db.session.delete(self)
+            db.session.commit()   
 
     def __repr__(self):
         return f'User {self.blog}'
@@ -70,7 +74,8 @@ class Comment(db.Model):
     @classmethod
     def delete_comment(self):
         db.session.delete(self)
-        db.session.commit()  
+        db.session.commit() 
+         
 
     def __repr__(self):
         return f'User {self.comment}'

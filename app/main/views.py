@@ -2,7 +2,7 @@ from flask import render_template,request,redirect,url_for,abort,request
 from . import main
 from ..models import  User,Blog,Comment,Subscriber,Quote
 from flask_login import login_required, current_user
-from .forms import BlogForm,CommentForm,UpdateProfile,SubscriberForm
+from .forms import BlogForm,CommentForm,UpdateProfile,SubscriberForm,UpdateForm
 from .. import db,photos
 from ..request import get_quotes
 
@@ -112,32 +112,54 @@ def subscriber():
 
 
 
-@main.route('/blog/edit/<int:id>', methods=['GET', 'POST'])
+# @main.route('/blog/edit/<int:id>', methods=['GET', 'POST'])
+# @login_required
+# def edit_blog(id):
+#     """
+#     Edit a blogpost in the database
+#     """
+#     new_blog=False
+
+#     blog = Blog.get_blogs(id)
+#     form = BlogForm()
+
+#     if form.validate_on_submit():
+#         blog.blog = form.blog.data
+
+#         db.session.commit()
+#         print('edited comment ')
+
+
+#         return redirect(url_for('main.index'))
+#         form.blog.data = blog.blog
+
+#     return render_template('new_blog.html',action = 'Edit',
+#                            new_blog = new_blog,
+#                            blog_form = form)
+                          
+
+@main.route('/delete/blog/<int:id>' ,methods= ['GET', 'POST'])
 @login_required
-def edit_blog(id):
-    """
-    Edit a blogpost in the database
-    """
-    new_blog=False
-
-    blog = Blog.get_blogs(id)
-    form = BlogForm()
-
-    if form.validate_on_submit():
-        blog.blog = form.blog.data
-
-        db.session.commit()
-        print('edited comment ')
-
-
+def delete_blogs(id):
+    blog=Blog.query.filter_by(id=id).first()
+    if blog is not None:
+        blog.delete_blogs(id)
         return redirect(url_for('main.index'))
-        form.blog.data = blog.blog
+@main.route('/update/blog/<int:id>' , methods= ['GET','POST'])
+@login_required
+def update_blog(id):
+    blog=Blog.query.filter_by(id=id).first()
+    if blog is None:
+        abort(404)
+    form=UpdateForm() 
+    if form.validate_on_submit():
+        blog.blog=form.blog.data
+        
 
-    return render_template('new_blog.html',action = 'Edit',
-                           new_blog = new_blog,
-                           blog_form = form,
-                           legend='Update Post')
-
+        db.session.add(blog)
+        db.session.commit()  
+        return redirect(url_for('main.index'))
+    return render_template('update.html',update_form=form)     
 
 @main.route('/delete/new<int:id>',methods=["GET","POST"])
 def delete_comment(id):
@@ -146,3 +168,12 @@ def delete_comment(id):
        commet.delete_comment()
 
     return render_template('comment.html', comment_form= form)
+
+
+# @main.route('/update/new<int:id>',methods=["GET","POST"])
+# def update(id):
+
+#     if comment is not None:
+#        commet.update_comment()
+
+#     return render_template('comment.html', comment_form= form)  
